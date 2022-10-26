@@ -1,0 +1,84 @@
+import System;
+
+module Sily.Conv {
+    // Syntax:
+    // to(_Int.T, from) // going to cast `from` to int and return int
+    // this way of things is required since jspp has no way of checking
+    // template types in which case it would be to<int>(from)
+
+    bool to(_Bool type, external from) {
+        return Boolean.fromStringOr(from.toString(), false);
+    }
+    
+    signed byte to(_Byte type, external from) {
+        return Integer8.fromStringOr(from.toString(), 0);
+    }
+    
+    byte to(_UByte type, external from) {
+        return UInteger8.fromStringOr(from.toString(), 0);
+    }
+    
+    short to(_Short type, external from) {
+        return Integer16.fromStringOr(from.toString(), 0);
+    }
+    
+    unsigned short to(_UShort type, external from) {
+        return UInteger16.fromStringOr(from.toString(), 0);
+    }
+    
+    int to(_Int type, external from) {
+        return Integer32.fromStringOr(from.toString(), 0);
+    }
+    
+    unsigned int to(_UInt type, external from) {
+        return UInteger32.fromStringOr(from.toString(), 0);
+    }
+    
+    long to(_Long type, external from) {
+        return (long) Integer32.fromStringOr(from.toString(), 0);
+    }
+    
+    unsigned long to(_ULong type, external from) {
+        return (unsigned long) UInteger32.fromStringOr(from.toString(), 0);
+    }
+    
+    float to(_Float type, external from) {
+        return (float) Double.fromStringOr(from.toString(), 0d);
+    }
+    
+    double to(_Double type, external from) {
+        return Double.fromStringOr("" + from, 0d);
+    }
+    
+    char to(_Char type, external from) {
+        string s = from.toString();
+        char+ c = s.charAt(0);
+        return c ?? `\0`;
+    }
+    
+    string to(_String type, external from) {
+        return from.toString();
+    }
+
+    enum _Bool {T}
+    enum _Byte {T}
+    enum _UByte {T}
+    enum _Short {T}
+    enum _UShort {T}
+    enum _Int {T}
+    enum _UInt {T}
+    enum _Long {T}
+    enum _ULong {T}
+    enum _Float {T}
+    enum _Double {T}
+    enum _Char {T}
+    enum _String {T}
+
+    // void to(Bool type, external from, T typo) {
+    //     T ntype = typo;
+    //     // if (typeid type = "System.Int32") {
+    //         // return (T) Integer32.fromStringOr(from.toString(), 0);
+    //     // }
+    //     return;
+    // }
+}

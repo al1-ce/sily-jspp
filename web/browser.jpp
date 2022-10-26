@@ -1,0 +1,48 @@
+import System;
+
+import Externals.DOM;
+
+module Sily.Web.Browser {
+
+    class WebPage {
+        public static property function page() { return document; }
+        public static property function head() { return document.head; }
+        public static property function body() { return document.body; }
+
+        // TODO wrap DOM element into js++ class
+        public static function get(string query) {
+            return document.querySelector(query);
+        }
+
+        public static function getAll(string query) {
+            return document.querySelectorAll(query);
+        }
+
+        public static void appendTo(external element, external parent) {
+            parent.append(element);
+        }
+    }
+
+    void onReady(void() func) { document.addEventListener("DOMContentLoaded", func); }
+
+    /**
+    * @param {String} HTML representing a single element
+    * @return {Element}
+    */
+    function htmlToElement(string html) {
+        var template = document.createElement('template');
+        html = html.trim(); // Never return a text node of whitespace as the result
+        template.innerHTML = html;
+        return template.content.firstChild;
+    }
+
+    /**
+    * @param {String} HTML representing any number of sibling elements
+    * @return {NodeList} 
+    */
+    function htmlToElements(string html) {
+        var template = document.createElement('template');
+        template.innerHTML = html;
+        return template.content.childNodes;
+    }
+}

@@ -1,0 +1,59 @@
+import Externals.DOM;
+import System;
+import System.Encoding.URI;
+
+module Sily.Web.Storage {
+
+    void setCookie(string cname, string cvalue, int exdays) {
+        Date d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60  * 60 * 1000));
+        string expires = "expires=" + d.toString();
+        document.cookie = cname + "=" + cvalue + "\;" + expires + "\;path=/";
+    }
+
+    string getCookie(string cname) {
+        string name = cname + "=";
+        string decodedCookie = decodeURIComponent(document.cookie);
+        string[] ca = decodedCookie.split("\;");
+
+        for (int i in ca) {
+            string c = ca[i] ?? "";
+            while (c.charAt(0) == ` `) {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+
+        return '';
+    }
+
+    void delCookie(string cname) {
+        document.cookie = cname + "=\; expires=Thu, 01 Jan 1970 00:00:00 UTC\; path=/\;";
+    }
+
+    string getOrInitCookie(string cname, cdef) {
+        string c = getCookie(cname);
+
+        if (c == "") {
+            c = cdef;
+            setCookie(cname, c, 365);
+        }
+
+        return c;
+    }
+
+    
+    Dictionary<string> getUrlVars() {
+        string href = window.location.href;
+        Dictionary<string> vars = new Dictionary<string>();
+        string[] hashes = href.slice(href.indexOf('?') + 1).split('#')[0]?.split('&') ?? [""];
+        for (int i in hashes) {
+            string[] hash = hashes[i]?.split('=') ?? ["", ""];
+            string _hash = hash[0] ?? "";
+            vars[_hash] = hash[1] ?? "";
+        }
+        return vars;
+    }
+}

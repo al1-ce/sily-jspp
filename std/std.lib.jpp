@@ -1,0 +1,6 @@
+module Sily.Std {
+    // basically a global module space
+    import Sily.Conv;
+    import Sily.Math;
+    import Sily.String;
+}

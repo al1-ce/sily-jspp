@@ -1,0 +1,67 @@
+import System;
+import Externals.DOM;
+
+import Sily.Web.Browser;
+
+import Sily.Math;
+
+module Sily.Web.Canvas {
+    class Canvas {
+        private var _canvas;
+        private var _ctx;
+        private int _w;
+        private int _h;
+
+        public Canvas(int w, int h) {
+            var c = htmlToElement(
+            """<canvas 
+                width=\"%s\" 
+                height=\"%s\" 
+                style=\"display: initial;\"
+            ></canvas>""".format(w, h));
+
+            WebPage.body.append(c);
+
+            _canvas = c;
+            _ctx = c.getContext("2d");
+
+            _w = w;
+            _h = h;
+        }
+
+        public void fill(Color color) {
+            _ctx.fillStyle = color.toCSS();
+            _ctx.fillRect(0, 0, _w, _h);
+            _ctx.closePath();
+        }
+
+        public void line(Vector2<double> from, Vector2<double> to, Color color) {
+            line(from.x, from.y, to.x, to.y, color);
+        }
+
+        public void line(double x1, double y1, double x2, double y2, Color color) {
+            _ctx.strokeStyle = color.toCSS();
+            _ctx.beginPath();
+            _ctx.moveTo(x1, y1);
+            _ctx.lineTo(x2, y2);
+            _ctx.closePath();
+            _ctx.stroke();
+        }
+
+        public void hide() {
+            _canvas.style.display = "none";
+        }
+
+        public void show() {
+            _canvas.style.display = "initial";
+        }
+
+        public void clear() {
+            _ctx.clearRect(0, 0, _w, _h);
+        }
+
+        public void destroy() {
+            _canvas.remove();
+        }
+    }
+}
