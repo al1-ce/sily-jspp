@@ -1,3 +1,0 @@
-module Sily.String {
-    import Sily.String.Getopt;
-}

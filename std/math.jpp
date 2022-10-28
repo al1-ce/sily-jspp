@@ -1,6 +1,6 @@
 import System;
 
-module Sily.Math {
+module sily.math {
     // TODO rewrite vectors with private members & arrays
     class Vector2<T> {
         public T x;

@@ -1,7 +1,7 @@
 # Sily Lib for JS++
 
 ## Contents
-- Sily.Assets: Everything related to asset-type resources. Including Images, Audio, Fonts, etc
-- Sily.Engine: Basic game engine
-- Sily.Std: Global-scope modules, like Math, Conv, String
-- Sily.Web: All browser & DOM related
+- sily.assets: Everything related to asset-type resources. Including Images, Audio, Fonts, etc
+- sily.engine: Basic game engine
+- sily.std: Global-scope modules, like Math, Conv, String
+- sily.web: All browser & DOM related

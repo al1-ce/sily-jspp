@@ -1,6 +1,6 @@
 import System;
 
-module Sily.Conv {
+module sily.conv {
     // Syntax:
     // to(_Int.T, from) // going to cast `from` to int and return int
     // this way of things is required since jspp has no way of checking

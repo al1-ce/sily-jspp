@@ -1,6 +1,1 @@
-module Sily.Assets {
-    // all possible asset types
-    // aka images, audio, fonts, etc...
-    import Sily.Assets.Image;
-    import Sily.Assets.Audio;
-}
+module sily.assets {}

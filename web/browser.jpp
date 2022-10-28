@@ -2,7 +2,7 @@ import System;
 
 import Externals.DOM;
 
-module Sily.Web.Browser {
+module sily.web.browser {
 
     class WebPage {
         public static property function page() { return document; }

@@ -1,9 +1,1 @@
-module Sily {
-    // my lib
-    import Sily.Assets;
-    import Sily.Engine;
-    import Sily.Std;
-    import Sily.Web;
-}
-
-// TODO fix library collisions
+module sily {}

@@ -1,12 +1,12 @@
 import System;
 
-import Sily.Web.Browser;
+import sily.web.browser;
 
-import Sily.Assets.Images;
+import sily.assets.image;
 
-import Sily.Math;
+import sily.math;
 
-module Sily.Web.Canvases {
+module sily.web.canvas {
     class Canvas {
         private var _canvas;
         private var _ctx;

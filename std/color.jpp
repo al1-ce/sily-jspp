@@ -1,6 +1,0 @@
-import System;
-
-import Sily.Math;
-
-module Sily.Color {
-}

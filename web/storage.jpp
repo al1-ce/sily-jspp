@@ -2,7 +2,7 @@ import Externals.DOM;
 import System;
 import System.Encoding.URI;
 
-module Sily.Web.Storage {
+module sily.web.storage {
 
     void setCookie(string cname, string cvalue, int exdays) {
         Date d = new Date();

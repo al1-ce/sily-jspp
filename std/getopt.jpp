@@ -1,7 +1,7 @@
-import System;
-import System.Assert;
+import std;
+import std.assert;
 
-module Sily.String.Getopt {
+module sily.getopt {
     // enum FlagType {
     //     INT, DOUBLE, STRING, BOOL
     // }

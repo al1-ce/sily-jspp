@@ -1,8 +1,1 @@
-module Sily.Web {
-    // all the dom elements
-    import Sily.Web.Browser;
-    import Sily.Web.Canvas;
-    import Sily.Web.Element;
-    import Sily.Web.Storage;
-    import Sily.Web.Style;
-}
+module sily.web {}
