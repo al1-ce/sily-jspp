@@ -1,1 +1,7 @@
-module Sily.Assets.Image {}
+import Sily.Web.Canvases;
+
+module Sily.Assets.Images {
+    class Image {
+        public void draw(Canvas canv, double x, double y, double xsc, double ysc, double rot, double a) {}
+    }
+}
