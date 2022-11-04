@@ -54,7 +54,7 @@ double to(_Double type, external from) {
 char to(_Char type, external from) {
     string s = from.toString();
     char+ c = s.charAt(0);
-    return c ?? `\0`;
+    return c ?? '\0';
 }
 
 string to(_String type, external from) {
