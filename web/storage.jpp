@@ -19,7 +19,7 @@ string getCookie(string cname) {
 
     for (int i in ca) {
         string c = ca[i] ?? "";
-        while (c.charAt(0) == ` `) {
+        while (c.charAt(0) == ' ') {
             c = c.substring(1);
         }
         if (c.indexOf(name) == 0) {
@@ -27,7 +27,7 @@ string getCookie(string cname) {
         }
     }
 
-    return '';
+    return "";
 }
 
 void delCookie(string cname) {
@@ -49,9 +49,9 @@ string getOrInitCookie(string cname, cdef) {
 Dictionary<string> getUrlVars() {
     string href = window.location.href;
     Dictionary<string> vars = new Dictionary<string>();
-    string[] hashes = href.slice(href.indexOf('?') + 1).split('#')[0]?.split('&') ?? [""];
+    string[] hashes = href.slice(href.indexOf("?") + 1).split("#")[0]?.split("&") ?? [""];
     for (int i in hashes) {
-        string[] hash = hashes[i]?.split('=') ?? ["", ""];
+        string[] hash = hashes[i]?.split("=") ?? ["", ""];
         string _hash = hash[0] ?? "";
         vars[_hash] = hash[1] ?? "";
     }
