@@ -1,0 +1,11 @@
+name: sily.lib
+description: sily lib jspp
+authors: Alisa Lain
+copyright: Copyright (c) 2022, Alisa Lain
+license: MIT license
+build:
+    jsppext2jspp: 
+        sourcePath: .
+        outputPath: itwillnotmatter
+        debug: yes
+defaultBuild: jsppext2jspp

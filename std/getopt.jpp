@@ -1,29 +1,31 @@
+module sily.getopt;
+
 import std;
 import std.assert;
 
-module sily.getopt {
-    // enum FlagType {
-    //     INT, DOUBLE, STRING, BOOL
-    // }
+// enum FlagType {
+//     INT, DOUBLE, STRING, BOOL
+// }
 
-    /**
-    * Returns flag value from `args[]` and removes flag and value from `args[]`. \
-    * Search is case sensitive. For bools short args can be merged, aka `-cav`
-    * @param {string[]} args
-    * @param {string} flag In form of "longFlag|short|s..." (aka. "long|s").  \
-    * Short flags are optional. To Get only short flag type "|s".
-    * @param {any} defret Default return. If `null` returns `false`, `""` or `0`
-    * @returns {any}
-    */
-    public T getopt<T>(string[] args, string flag, T defret) {
-        string dargs = [...args];
-        if ((idx = dargs.indexOf("--")) != -1) {
-            dargs.splice(idx);
-        }
-
-        return defret;
+/**
+* Returns flag value from `args[]` and removes flag and value from `args[]`. \
+* Search is case sensitive. For bools short args can be merged, aka `-cav`
+* @param {string[]} args
+* @param {string} flag In form of "longFlag|short|s..." (aka. "long|s").  \
+* Short flags are optional. To Get only short flag type "|s".
+* @param {any} defret Default return. If `null` returns `false`, `""` or `0`
+* @returns {any}
+*/
+public T getopt<T>(string[] args, string flag, T defret) {
+    System.Array<string> dargs = new System.Array<string>(args);
+    int idx = dargs.indexOf("--");
+    if (idx != -1) {
+        dargs.splice(idx);
     }
+
+    return defret;
 }
+
 
 // void doUnitTest() {
 //     string[] arr = ["app", "-f", "--force", "--h", "ytay", "1", "-v", "1", "abara"];

@@ -1,7 +1,7 @@
+module sily.assets.image;
+
 import sily.web.canvas;
 
-module sily.assets.image {
-    class Image {
-        public void draw(Canvas canv, double x, double y, double xsc, double ysc, double rot, double a) {}
-    }
+class Image {
+    public void draw(Canvas canv, double x, double y, double xsc, double ysc, double rot, double a) {}
 }

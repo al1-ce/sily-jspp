@@ -1,160 +1,160 @@
-import System;
+module sily.math;
 
-module sily.math {
-    // TODO rewrite vectors with private members & arrays
-    class Vector2<T> {
-        public T x;
-        public T y;
+import std;
 
-        public property void u(T _u) { x = _u; }
-        public property void v(T _v) { y = _v; }
+// TODO rewrite vectors with private members & arrays
+class Vector2<T> {
+    public T x;
+    public T y;
 
-        public property T u() { return x; }
-        public property T v() { return y; }
+    public property void u(T _u) { x = _u; }
+    public property void v(T _v) { y = _v; }
 
-        public Vector2(T _x, T _y) {
-            x = _x;
-            y = _y;
-        }
+    public property T u() { return x; }
+    public property T v() { return y; }
 
-        public Dictionary<T> toDict() {
-            return {x: x, y: y};
-        }
-
-        public override string toString() {
-            return "\(" + x.toString() + ", " + y.toString() + "\)";
-        }
+    public Vector2(T _x, T _y) {
+        x = _x;
+        y = _y;
     }
 
-    class Vector3<T> {
-        public T x;
-        public T y;
-        public T z;
-
-        public property void r(T _r) { x = _r; }
-        public property void g(T _g) { y = _g; }
-        public property void b(T _b) { z = _b; }
-
-        public property T r() { return x; }
-        public property T g() { return y; }
-        public property T b() { return z; }
-
-        public Vector3(T _x, T _y, T _z) {
-            x = _x;
-            y = _y;
-            z = _z;
-        }
-
-        public Dictionary<T> toDict() {
-            return {x: x, y: y, z: z};
-        }
-
-        public override string toString() {
-            return "\(" + x.toString() + ", " + y.toString() + ", " + z.toString() + "\)";
-        }
+    public Dictionary<T> toDict() {
+        return {x: x, y: y};
     }
 
-    class Vector4<T> {
-        public T x;
-        public T y;
-        public T z;
-        public T w;
-
-        public property void r(T _r) { x = _r; }
-        public property void g(T _g) { y = _g; }
-        public property void b(T _b) { z = _b; }
-        public property void a(T _a) { w = _a; }
-
-        public property T r() { return x; }
-        public property T g() { return y; }
-        public property T b() { return z; }
-        public property T a() { return w; }
-
-        public Vector4(T _x, T _y, T _z, T _w) {
-            x = _x;
-            y = _y;
-            z = _z;
-            w = _w;
-        }
-
-        public Dictionary<T> toDict() {
-            return {x: x, y: y, z: z, w: w};
-        }
-
-        public override string toString() {
-            return "\(" + x.toString() + ", " + y.toString() + ", " + z.toString() + ", " + w.toString() + "\)";
-        }
+    public override string toString() {
+        return "\(" + x.toString() + ", " + y.toString() + "\)";
     }
-
-    class Color {
-        public double x;
-        public double y;
-        public double z;
-        public double w;
-
-        public property void r(double _r) { x = _r; }
-        public property void g(double _g) { y = _g; }
-        public property void b(double _b) { z = _b; }
-        public property void a(double _a) { w = _a; }
-
-        public property double r() { return x; }
-        public property double g() { return y; }
-        public property double b() { return z; }
-        public property double a() { return w; }
-
-        public Color(double _r, double _g, double _b) {
-            x = _r;
-            y = _g;
-            z = _b;
-            w = 1;
-        }
-
-        public Color(double _x, double _y, double _z, double _w) {
-            x = _x;
-            y = _y;
-            z = _z;
-            w = _w;
-        }
-
-        public Dictionary<double> toDict() {
-            return {x: x, y: y, z: z, w: w};
-        }
-
-        public override string toString() {
-            return "\(" + x.toString() + ", " + y.toString() + ", " + z.toString() + ", " + w.toString() + "\)";
-        }
-
-        // public string toHex() {
-        //     string txt = "#";
-        //     txt += getHex(r);
-        //     txt += getHex(g);
-        //     txt += getHex(b);
-        //     txt += getHex(a);
-        //     return txt;
-        // }
-
-        public string toCSS() {
-            string txt = "rgba(";
-            txt += (x * 255).toString() + ",";
-            txt += (y * 255).toString() + ",";
-            txt += (z * 255).toString() + ",";
-            txt += w.toString();
-            txt += ")";
-            return txt;
-        }
-
-        public Vector4<double> toVec4() {
-            return new Vector4<double>(x, y, z, w);
-        }
-    }
-
-    double lerp(double v0, double v1, double t) {
-        return v0 * ( 1.0 - t ) + v1 * t;
-    }
-
-    // string getHex(double val) {
-    //     string res = "";
-    //     int v = clamp((int) val * 255, 0, 255);
-
-    // }
 }
+
+class Vector3<T> {
+    public T x;
+    public T y;
+    public T z;
+
+    public property void r(T _r) { x = _r; }
+    public property void g(T _g) { y = _g; }
+    public property void b(T _b) { z = _b; }
+
+    public property T r() { return x; }
+    public property T g() { return y; }
+    public property T b() { return z; }
+
+    public Vector3(T _x, T _y, T _z) {
+        x = _x;
+        y = _y;
+        z = _z;
+    }
+
+    public Dictionary<T> toDict() {
+        return {x: x, y: y, z: z};
+    }
+
+    public override string toString() {
+        return "\(" + x.toString() + ", " + y.toString() + ", " + z.toString() + "\)";
+    }
+}
+
+class Vector4<T> {
+    public T x;
+    public T y;
+    public T z;
+    public T w;
+
+    public property void r(T _r) { x = _r; }
+    public property void g(T _g) { y = _g; }
+    public property void b(T _b) { z = _b; }
+    public property void a(T _a) { w = _a; }
+
+    public property T r() { return x; }
+    public property T g() { return y; }
+    public property T b() { return z; }
+    public property T a() { return w; }
+
+    public Vector4(T _x, T _y, T _z, T _w) {
+        x = _x;
+        y = _y;
+        z = _z;
+        w = _w;
+    }
+
+    public Dictionary<T> toDict() {
+        return {x: x, y: y, z: z, w: w};
+    }
+
+    public override string toString() {
+        return "\(" + x.toString() + ", " + y.toString() + ", " + z.toString() + ", " + w.toString() + "\)";
+    }
+}
+
+class Color {
+    public double x;
+    public double y;
+    public double z;
+    public double w;
+
+    public property void r(double _r) { x = _r; }
+    public property void g(double _g) { y = _g; }
+    public property void b(double _b) { z = _b; }
+    public property void a(double _a) { w = _a; }
+
+    public property double r() { return x; }
+    public property double g() { return y; }
+    public property double b() { return z; }
+    public property double a() { return w; }
+
+    public Color(double _r, double _g, double _b) {
+        x = _r;
+        y = _g;
+        z = _b;
+        w = 1;
+    }
+
+    public Color(double _x, double _y, double _z, double _w) {
+        x = _x;
+        y = _y;
+        z = _z;
+        w = _w;
+    }
+
+    public Dictionary<double> toDict() {
+        return {x: x, y: y, z: z, w: w};
+    }
+
+    public override string toString() {
+        return "\(" + x.toString() + ", " + y.toString() + ", " + z.toString() + ", " + w.toString() + "\)";
+    }
+
+    // public string toHex() {
+    //     string txt = "#";
+    //     txt += getHex(r);
+    //     txt += getHex(g);
+    //     txt += getHex(b);
+    //     txt += getHex(a);
+    //     return txt;
+    // }
+
+    public string toCSS() {
+        string txt = "rgba(";
+        txt += (x * 255).toString() + ",";
+        txt += (y * 255).toString() + ",";
+        txt += (z * 255).toString() + ",";
+        txt += w.toString();
+        txt += ")";
+        return txt;
+    }
+
+    public Vector4<double> toVec4() {
+        return new Vector4<double>(x, y, z, w);
+    }
+}
+
+double lerp(double v0, double v1, double t) {
+    return v0 * ( 1.0 - t ) + v1 * t;
+}
+
+// string getHex(double val) {
+//     string res = "";
+//     int v = clamp((int) val * 255, 0, 255);
+
+// }

@@ -1,209 +1,207 @@
-import System;
+module sily.web.canvas;
+
+import std;
 
 import sily.web.browser;
-
 import sily.assets.image;
-
 import sily.math;
 
-module sily.web.canvas {
-    class Canvas {
-        private var _canvas;
-        private var _ctx;
-        private int _w;
-        private int _h;
+class Canvas {
+    private var _canvas;
+    private var _ctx;
+    private int _w;
+    private int _h;
 
-        public property function canvas() { return _canvas; }
-        public property function ctx() { return _ctx; }
+    public property function canvas() { return _canvas; }
+    public property function ctx() { return _ctx; }
 
-        public Canvas(int w, int h) {
-            var c = htmlToElement(
-            """<canvas 
-                width=\"%s\" 
-                height=\"%s\" 
-                style=\"display: initial;\"
-            ></canvas>""".format(w, h));
+    public Canvas(int w, int h) {
+        var c = htmlToElement(
+        `<canvas 
+            width=\"%s\" 
+            height=\"%s\" 
+            style=\"display: initial;\"
+        ></canvas>`.format(w, h));
 
-            WebPage.body.append(c);
+        WebPage.body.append(c);
 
-            _canvas = c;
-            _ctx = c.getContext("2d");
+        _canvas = c;
+        _ctx = c.getContext("2d");
 
-            _w = w;
-            _h = h;
-        }
+        _w = w;
+        _h = h;
+    }
 
-        public void fill(Color color) {
-            _ctx.fillStyle = color.toCSS();
-            _ctx.fillRect(0, 0, _w, _h);
-            _ctx.closePath();
-        }
+    public void fill(Color color) {
+        _ctx.fillStyle = color.toCSS();
+        _ctx.fillRect(0, 0, _w, _h);
+        _ctx.closePath();
+    }
 
-        public void rect(Vector2<double> pos, Vector2<double> size, Color borderColor, Color fillColor) {
-            rect(pos.x, pos.y, size.x, size.y, borderColor, fillColor);
-        }
+    public void rect(Vector2<double> pos, Vector2<double> size, Color borderColor, Color fillColor) {
+        rect(pos.x, pos.y, size.x, size.y, borderColor, fillColor);
+    }
 
-        public void rect(double x, double y, double w, double h, Color borderColor, Color fillColor) {
-            _ctx.strokeStyle = borderColor.toCSS();
-            // TODO add no fill
-            _ctx.fillStyle = fillColor.toCSS();
-            _ctx.fillRect(x, y, w, h);
-            _ctx.strokeRect(x, y, w, h);
-            _ctx.closePath();
-        }
+    public void rect(double x, double y, double w, double h, Color borderColor, Color fillColor) {
+        _ctx.strokeStyle = borderColor.toCSS();
+        // TODO add no fill
+        _ctx.fillStyle = fillColor.toCSS();
+        _ctx.fillRect(x, y, w, h);
+        _ctx.strokeRect(x, y, w, h);
+        _ctx.closePath();
+    }
 
-        public void line(Vector2<double> from, Vector2<double> to, Color color) {
-            line(from.x, from.y, to.x, to.y, color);
-        }
+    public void line(Vector2<double> from, Vector2<double> to, Color color) {
+        line(from.x, from.y, to.x, to.y, color);
+    }
 
-        public void line(double x1, double y1, double x2, double y2, Color color) {
-            _ctx.strokeStyle = color.toCSS();
-            _ctx.beginPath();
-            _ctx.moveTo(x1, y1);
-            _ctx.lineTo(x2, y2);
-            _ctx.closePath();
-            _ctx.stroke();
-        }
+    public void line(double x1, double y1, double x2, double y2, Color color) {
+        _ctx.strokeStyle = color.toCSS();
+        _ctx.beginPath();
+        _ctx.moveTo(x1, y1);
+        _ctx.lineTo(x2, y2);
+        _ctx.closePath();
+        _ctx.stroke();
+    }
 
-        public void circle(Vector2<double> pos, double r, Color borderColor, Color fillColor) {
-            circle(pos.x, pos.y, r, borderColor, fillColor);
-        }
+    public void circle(Vector2<double> pos, double r, Color borderColor, Color fillColor) {
+        circle(pos.x, pos.y, r, borderColor, fillColor);
+    }
 
-        public void circle(double x, double y, double r, Color borderColor, Color fillColor) {
-            _ctx.strokeStyle = borderColor.toCSS();
-            _ctx.beginPath();
-            _ctx.arc(x, y, r, 0,  1 * System.Math.PI, false);
-            _ctx.closePath();
-            // TODO add no fill option
-            _ctx.fillStyle = fillColor.toCSS();
-            _ctx.fill();
-            _ctx.stroke();
-        }
-        
-        // TODO add halign valign enum
-        // TODO make pixel conversion
-        public void text(Vector2<double> pos, string _text, string fontName, string fontSize, bool doFill, string color, string align, string valign) {
-            text(pos.x, pos.y, _text, fontName, fontSize, doFill, color, align, valign);
-        }
+    public void circle(double x, double y, double r, Color borderColor, Color fillColor) {
+        _ctx.strokeStyle = borderColor.toCSS();
+        _ctx.beginPath();
+        _ctx.arc(x, y, r, 0,  1 * System.Math.PI, false);
+        _ctx.closePath();
+        // TODO add no fill option
+        _ctx.fillStyle = fillColor.toCSS();
+        _ctx.fill();
+        _ctx.stroke();
+    }
+    
+    // TODO add halign valign enum
+    // TODO make pixel conversion
+    public void text(Vector2<double> pos, string _text, string fontName, string fontSize, bool doFill, string color, string align, string valign) {
+        text(pos.x, pos.y, _text, fontName, fontSize, doFill, color, align, valign);
+    }
 
-        public void text(double x, double y, string _text, string fontName, string fontSize, bool doFill, string color, string align, string valign) {
-            _ctx.font = fontSize + ' ' + fontName;
-            _ctx.fillStyle = color;
-            _ctx.textAlign = align;
-            _ctx.textBaseLine = valign;
-            if (doFill) {
-                _ctx.fillText(_text, x, y);
-            } else {
-                _ctx.strokeText(_text, x, y);
-            }
-        }
-
-        // TODO do something about auto imports
-        public void image(Image img, Vector2<double> pos, Vector2<double> size, double rot, double a) {
-            image(img, pos.x, pos.y, size.x, size.y, rot, a);
-        }
-
-        public void image(Image img, double x, double y, double xscale, double yscale, double rot, double a) {
-            img.draw(this, x, y, xscale, yscale, rot, a);
-        }
-
-        public void drawCanvas(Canvas canv, Vector2<double> pos) {
-            drawCanvas(canv, pos.x, pos.y);
-        }
-
-        public void drawCanvas(Canvas canv, double x, double y) {
-            _ctx.drawImage(canv.canvas, x, y);
-        }
-
-        public void drawSetAlpha(double a) {
-            _ctx.globalAlpha = a;
-        }
-
-        public double drawGetAlpha() {
-            return (double) _ctx.globalAlpha;
-        }
-
-        // todo do enum
-        public void drawSetBlend(string blend) {
-            _ctx.globalCompositeOperation = blend;
-        }
-
-        public function drawGetBlend() {
-            return _ctx.globalCompositeOperation;
-        }
-
-        public void drawResetBlend() {
-            drawSetBlend("source-over");
-        }
-
-        public void hide() {
-            _canvas.style.display = "none";
-        }
-
-        public void show() {
-            _canvas.style.display = "initial";
-        }
-
-        public void translate(Vector2<double> pos) {
-            translate(pos.x, pos.y);
-        }
-
-        public void translate(double x, double y) {
-            _ctx.translate(x, y);
-        }
-
-        public void reset() {
-            _ctx.setTransform(1, 0, 0, 1, 0, 0);
-            drawResetBlend();
-            drawSetAlpha(1.0d);
-        }
-
-        // TODO rotate
-
-        public void scale(Vector2<double> size) {
-            scale(size.x, size.y);
-        }
-
-        public void scale(double x, double y) {
-            _ctx.scale(x, y);
-        }
-
-        public void clear() {
-            _ctx.clearRect(0, 0, _w, _h);
-        }
-
-        public void destroy() {
-            _canvas.remove();
+    public void text(double x, double y, string _text, string fontName, string fontSize, bool doFill, string color, string align, string valign) {
+        _ctx.font = fontSize + " " + fontName;
+        _ctx.fillStyle = color;
+        _ctx.textAlign = align;
+        _ctx.textBaseLine = valign;
+        if (doFill) {
+            _ctx.fillText(_text, x, y);
+        } else {
+            _ctx.strokeText(_text, x, y);
         }
     }
 
-    public final class BLEND_MODES {
-        public static final string NORMAL = "source-over";
-        public static final string SRC_OVER = "source-over";
-        public static final string SRC_IN = "source-in";
-        public static final string SRC_OUT = "source-in";
-        public static final string SRC_ATOP = "source-in";
-        public static final string DEST_OVER = "source-in";
-        public static final string DEST_IN = "source-in";
-        public static final string DEST_OUT = "source-in";
-        public static final string DEST_ATOP = "source-in";
-        public static final string LIGHTER = "source-in";
-        public static final string COPY = "source-in";
-        public static final string XOR = "source-in";
-        public static final string MULT = "source-in";
-        public static final string SCREEN = "source-in";
-        public static final string OVERLAY = "source-in";
-        public static final string DARKEN = "source-in";
-        public static final string LIGHTEN = "source-in";
-        public static final string DODGE = "source-in";
-        public static final string BURN = "source-in";
-        public static final string HARD_LIGHT = "source-in";
-        public static final string SOFT_LIGHT = "source-in";
-        public static final string DIFFERENCE = "source-in";
-        public static final string EXCLUSION = "source-in";
-        public static final string HUE = "source-in";
-        public static final string SATURATION = "source-in";
-        public static final string COLOR = "source-in";
-        public static final string LUMINOSITY = "source-in";
+    // TODO do something about auto imports
+    public void image(Image img, Vector2<double> pos, Vector2<double> size, double rot, double a) {
+        image(img, pos.x, pos.y, size.x, size.y, rot, a);
     }
+
+    public void image(Image img, double x, double y, double xscale, double yscale, double rot, double a) {
+        img.draw(this, x, y, xscale, yscale, rot, a);
+    }
+
+    public void drawCanvas(Canvas canv, Vector2<double> pos) {
+        drawCanvas(canv, pos.x, pos.y);
+    }
+
+    public void drawCanvas(Canvas canv, double x, double y) {
+        _ctx.drawImage(canv.canvas, x, y);
+    }
+
+    public void drawSetAlpha(double a) {
+        _ctx.globalAlpha = a;
+    }
+
+    public double drawGetAlpha() {
+        return (double) _ctx.globalAlpha;
+    }
+
+    // todo do enum
+    public void drawSetBlend(string blend) {
+        _ctx.globalCompositeOperation = blend;
+    }
+
+    public function drawGetBlend() {
+        return _ctx.globalCompositeOperation;
+    }
+
+    public void drawResetBlend() {
+        drawSetBlend("source-over");
+    }
+
+    public void hide() {
+        _canvas.style.display = "none";
+    }
+
+    public void show() {
+        _canvas.style.display = "initial";
+    }
+
+    public void translate(Vector2<double> pos) {
+        translate(pos.x, pos.y);
+    }
+
+    public void translate(double x, double y) {
+        _ctx.translate(x, y);
+    }
+
+    public void reset() {
+        _ctx.setTransform(1, 0, 0, 1, 0, 0);
+        drawResetBlend();
+        drawSetAlpha(1.0d);
+    }
+
+    // TODO rotate
+
+    public void scale(Vector2<double> size) {
+        scale(size.x, size.y);
+    }
+
+    public void scale(double x, double y) {
+        _ctx.scale(x, y);
+    }
+
+    public void clear() {
+        _ctx.clearRect(0, 0, _w, _h);
+    }
+
+    public void destroy() {
+        _canvas.remove();
+    }
+}
+
+public final class BLEND_MODES {
+    public static final string NORMAL = "source-over";
+    public static final string SRC_OVER = "source-over";
+    public static final string SRC_IN = "source-in";
+    public static final string SRC_OUT = "source-in";
+    public static final string SRC_ATOP = "source-in";
+    public static final string DEST_OVER = "source-in";
+    public static final string DEST_IN = "source-in";
+    public static final string DEST_OUT = "source-in";
+    public static final string DEST_ATOP = "source-in";
+    public static final string LIGHTER = "source-in";
+    public static final string COPY = "source-in";
+    public static final string XOR = "source-in";
+    public static final string MULT = "source-in";
+    public static final string SCREEN = "source-in";
+    public static final string OVERLAY = "source-in";
+    public static final string DARKEN = "source-in";
+    public static final string LIGHTEN = "source-in";
+    public static final string DODGE = "source-in";
+    public static final string BURN = "source-in";
+    public static final string HARD_LIGHT = "source-in";
+    public static final string SOFT_LIGHT = "source-in";
+    public static final string DIFFERENCE = "source-in";
+    public static final string EXCLUSION = "source-in";
+    public static final string HUE = "source-in";
+    public static final string SATURATION = "source-in";
+    public static final string COLOR = "source-in";
+    public static final string LUMINOSITY = "source-in";
 }
