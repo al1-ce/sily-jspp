@@ -4,10 +4,29 @@ import std;
 
 import externals.dom;
 
+import sily.math;
+import sily.conv;
+
 class WebPage {
     public static property function page() { return document; }
     public static property function head() { return document.head; }
     public static property function body() { return document.body; }
+    public static property string href() { return to(_String.T, window.location.href); }
+    public static property void href(string _href) { window.location.replace(_href); }
+
+    public static property Vector2<double> windowSize() {
+        return new Vector2<double>(
+            to(_Double.T,  window.innerWidth), 
+            to(_Double.T, window.innerHeight)
+            );
+    }
+
+    public static property Vector2<double> clientSize() {
+        return new Vector2<double>(
+            to(_Double.T, document.body.clientWidth), 
+            to(_Double.T, document.body.clientWidth)
+            );
+    }
 
     // TODO wrap DOM element into js++ class
     public static function get(string query) {
