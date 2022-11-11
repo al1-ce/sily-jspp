@@ -7,6 +7,9 @@ import externals.dom;
 import sily.math;
 import sily.conv;
 
+alias Vector2d = Vector2<double>;
+alias vec2 = new Vector2<double>;
+
 class WebPage {
     public static property function page() { return document; }
     public static property function head() { return document.head; }
@@ -14,15 +17,15 @@ class WebPage {
     public static property string href() { return to(_String.T, window.location.href); }
     public static property void href(string _href) { window.location.replace(_href); }
 
-    public static property Vector2<double> windowSize() {
-        return new Vector2<double>(
+    public static property Vector2d windowSize() {
+        return vec2(
             to(_Double.T,  window.innerWidth), 
             to(_Double.T, window.innerHeight)
             );
     }
 
-    public static property Vector2<double> clientSize() {
-        return new Vector2<double>(
+    public static property Vector2d clientSize() {
+        return vec2(
             to(_Double.T, document.body.clientWidth), 
             to(_Double.T, document.body.clientWidth)
             );

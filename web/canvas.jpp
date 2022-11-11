@@ -6,6 +6,8 @@ import sily.web.browser;
 import sily.assets.image;
 import sily.math;
 
+alias Vector2d = Vector2<double>;
+
 class Canvas {
     private var _canvas;
     private var _ctx;
@@ -23,7 +25,7 @@ class Canvas {
             style=\"display: initial;\"
         ></canvas>`.format(w, h));
 
-        WebPage.body.append(c);
+        onReady(void() {WebPage.body.append(c);});
 
         _canvas = c;
         _ctx = c.getContext("2d");
@@ -38,7 +40,7 @@ class Canvas {
         _ctx.closePath();
     }
 
-    public void rect(Vector2<double> pos, Vector2<double> size, Color borderColor, Color fillColor) {
+    public void rect(Vector2d pos, Vector2d size, Color borderColor, Color fillColor) {
         rect(pos.x, pos.y, size.x, size.y, borderColor, fillColor);
     }
 
@@ -51,7 +53,7 @@ class Canvas {
         _ctx.closePath();
     }
 
-    public void line(Vector2<double> from, Vector2<double> to, Color color) {
+    public void line(Vector2d from, Vector2d to, Color color) {
         line(from.x, from.y, to.x, to.y, color);
     }
 
@@ -64,7 +66,7 @@ class Canvas {
         _ctx.stroke();
     }
 
-    public void circle(Vector2<double> pos, double r, Color borderColor, Color fillColor) {
+    public void circle(Vector2d pos, double r, Color borderColor, Color fillColor) {
         circle(pos.x, pos.y, r, borderColor, fillColor);
     }
 
@@ -81,7 +83,7 @@ class Canvas {
     
     // TODO add halign valign enum
     // TODO make pixel conversion
-    public void text(Vector2<double> pos, string _text, string fontName, string fontSize, bool doFill, string color, string align, string valign) {
+    public void text(Vector2d pos, string _text, string fontName, string fontSize, bool doFill, string color, string align, string valign) {
         text(pos.x, pos.y, _text, fontName, fontSize, doFill, color, align, valign);
     }
 
@@ -98,7 +100,7 @@ class Canvas {
     }
 
     // TODO do something about auto imports
-    public void image(Image img, Vector2<double> pos, Vector2<double> size, double rot, double a) {
+    public void image(Image img, Vector2d pos, Vector2d size, double rot, double a) {
         image(img, pos.x, pos.y, size.x, size.y, rot, a);
     }
 
@@ -106,7 +108,7 @@ class Canvas {
         img.draw(this, x, y, xscale, yscale, rot, a);
     }
 
-    public void drawCanvas(Canvas canv, Vector2<double> pos) {
+    public void drawCanvas(Canvas canv, Vector2d pos) {
         drawCanvas(canv, pos.x, pos.y);
     }
 
@@ -143,7 +145,7 @@ class Canvas {
         _canvas.style.display = "initial";
     }
 
-    public void translate(Vector2<double> pos) {
+    public void translate(Vector2d pos) {
         translate(pos.x, pos.y);
     }
 
@@ -159,7 +161,7 @@ class Canvas {
 
     // TODO rotate
 
-    public void scale(Vector2<double> size) {
+    public void scale(Vector2d size) {
         scale(size.x, size.y);
     }
 
