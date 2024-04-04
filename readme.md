@@ -1,5 +1,7 @@
 # Sily Lib for JS++
 
+# Archived since I do not intend to work on it anymore (at least for now). See jsppext for more detail
+
 ## Contents
 - sily.assets: Everything related to asset-type resources. Including Images, Audio, Fonts, etc
 - sily.engine: Basic game engine
